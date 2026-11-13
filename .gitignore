@@ -1,0 +1,42 @@
+# Python Virtual Envs
+venv/
+*/venv/
+*/*/venv/
+source/
+*/source/
+*/*/source/
+__pycache__/
+*/__pycache__/
+*/*/__pycache__/
+*.py[cod]
+*$py.class
+*.dylib
+*.so
+
+# Model weights & Checkpoints (>50MB)
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.onnx
+checkpoint-*/
+*/checkpoint-*/
+*/*/checkpoint-*/
+checkpoints/
+*/checkpoints/
+*/*/checkpoints/
+models/t5_faq/
+models/fine_tuned_legal_bert/
+
+# Node
+node_modules/
+*/node_modules/
+
+# OS & IDE
+.DS_Store
+*/.DS_Store
+*/*/.DS_Store
+.vscode/
+.idea/
+*.log

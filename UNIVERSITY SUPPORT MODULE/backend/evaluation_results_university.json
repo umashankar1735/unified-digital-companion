@@ -1,0 +1,26 @@
+{
+  "baseline": {
+    "Recall@1": 0.7,
+    "Recall@3": 0.912,
+    "Recall@5": 0.934,
+    "Recall@10": 0.972,
+    "Avg_Response_Time_ms": 10.413331031799316,
+    "Avg_Confidence": 0.7153766393661499,
+    "MRR": 0.8081063492063493,
+    "MAP": 0.8081063492063493,
+    "Answer_Accuracy": 0.715,
+    "Escalation_Rate": 0.002
+  },
+  "with_reranker": {
+    "Recall@1": 0.708,
+    "Recall@3": 0.918,
+    "Recall@5": 0.958,
+    "Recall@10": 0.982,
+    "Avg_Response_Time_ms": 32.63237905502319,
+    "Avg_Confidence": 0.7153766393661499,
+    "MRR": 0.8167190476190476,
+    "MAP": 0.8167190476190476,
+    "Answer_Accuracy": 0.695,
+    "Escalation_Rate": 0.002
+  }
+}

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UDC - Universal Digital Campus System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <h1 class="project-title">UDC System</h1>
+        </div>
+        <div class="header-center">
+            <span class="institution">Universal Digital Campus</span>
+        </div>
+        <div class="header-right">
+            <span class="user-role">Admin</span>
+            <button class="btn-secondary" onclick="logout()">Logout</button>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navigation">
+        <a href="index.html" class="nav-link active">Dashboard</a>
+        <a href="legal-module.html" class="nav-link">Legal Awareness</a>
+        <a href="university-module.html" class="nav-link">University Support</a>
+        <a href="analysis.html" class="nav-link">Analysis</a>
+        <a href="reports.html" class="nav-link">Reports</a>
+        <a href="settings.html" class="nav-link">Settings</a>
+        <a href="help.html" class="nav-link">Help</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <span>Home</span> / <span class="current">Dashboard</span>
+        </div>
+
+        <!-- Page Title -->
+        <div class="page-header">
+            <h2>System Dashboard</h2>
+            <p>Overview of Universal Digital Campus modules and performance metrics</p>
+        </div>
+
+        <!-- Summary Section -->
+        <section class="summary-section">
+            <div class="metric-card">
+                <div class="metric-icon">📊</div>
+                <div class="metric-content">
+                    <h3>10,266</h3>
+                    <p>Total Records</p>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-icon">⚖️</div>
+                <div class="metric-content">
+                    <h3>99.6%</h3>
+                    <p>Legal Module Accuracy</p>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-icon">🎓</div>
+                <div class="metric-content">
+                    <h3>77.6%</h3>
+                    <p>University Module F1</p>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-icon">✅</div>
+                <div class="metric-content">
+                    <h3>Active</h3>
+                    <p>System Status</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module Status -->
+        <section class="content-section">
+            <h3>Module Status</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Module</th>
+                        <th>Records</th>
+                        <th>Status</th>
+                        <th>Last Updated</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Legal Awareness</strong></td>
+                        <td>9,763</td>
+                        <td><span class="status-badge success">Active</span></td>
+                        <td>2026-01-27 15:14:33</td>
+                        <td><button class="btn-primary" onclick="window.location.href='legal-module.html'">Open</button></td>
+                    </tr>
+                    <tr>
+                        <td><strong>University Support</strong></td>
+                        <td>503</td>
+                        <td><span class="status-badge success">Active</span></td>
+                        <td>2026-01-27 15:14:33</td>
+                        <td><button class="btn-primary" onclick="window.location.href='university-module.html'">Open</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Performance Metrics -->
+        <section class="content-section">
+            <h3>Performance Overview</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Legal Module</th>
+                        <th>University Module</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Exact Match (EM)</td>
+                        <td>99.6%</td>
+                        <td>66.5%</td>
+                        <td><span class="status-badge success">Excellent</span></td>
+                    </tr>
+                    <tr>
+                        <td>F1 Score</td>
+                        <td>99.7%</td>
+                        <td>77.6%</td>
+                        <td><span class="status-badge success">Excellent</span></td>
+                    </tr>
+                    <tr>
+                        <td>Grounding</td>
+                        <td>100.0%</td>
+                        <td>100.0%</td>
+                        <td><span class="status-badge success">Perfect</span></td>
+                    </tr>
+                    <tr>
+                        <td>Hallucination Rate</td>
+                        <td>0.0%</td>
+                        <td>0.0%</td>
+                        <td><span class="status-badge success">None</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- System Information -->
+        <section class="content-section">
+            <h3>System Information</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>Version:</strong> 1.0.0
+                </div>
+                <div class="info-item">
+                    <strong>Technology:</strong> InLegalBERT, T5, FAISS, BM25
+                </div>
+                <div class="info-item">
+                    <strong>Last Evaluation:</strong> 2026-01-27
+                </div>
+                <div class="info-item">
+                    <strong>Deployment:</strong> Production Ready
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="content-section">
+            <h3>Quick Actions</h3>
+            <div class="action-buttons">
+                <button class="btn-primary" onclick="window.location.href='analysis.html'">View Analysis</button>
+                <button class="btn-primary" onclick="window.location.href='reports.html'">Generate Report</button>
+                <button class="btn-secondary" onclick="window.location.href='settings.html'">System Settings</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Universal Digital Campus System. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

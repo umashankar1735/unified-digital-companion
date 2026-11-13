@@ -1,0 +1,23 @@
+{
+  "system_name": "UDC (Universal Digital Campus)",
+  "evaluation_date": "2026-02-28T10:37:15.179124",
+  "legal_module": {
+    "EM": 99.6,
+    "F1": 99.669144648455,
+    "Grounding": 99.99999939203262,
+    "Hallucination": 0.0
+  },
+  "university_module": {
+    "EM": 66.5,
+    "F1": 77.5510928398006,
+    "Grounding": 99.99999922513962,
+    "Hallucination": 0.0
+  },
+  "intent_routing": {
+    "Accuracy": 94.1,
+    "F1": 0.92,
+    "Escalation": 6.2,
+    "Latency": 0.53,
+    "Throughput": 11.3
+  }
+}

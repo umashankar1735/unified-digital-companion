@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Support Module - UDC System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <h1 class="project-title">UDC System</h1>
+        </div>
+        <div class="header-center">
+            <span class="institution">Universal Digital Campus</span>
+        </div>
+        <div class="header-right">
+            <span class="user-role">Admin</span>
+            <button class="btn-secondary" onclick="logout()">Logout</button>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navigation">
+        <a href="index.html" class="nav-link">Dashboard</a>
+        <a href="legal-module.html" class="nav-link">Legal Awareness</a>
+        <a href="university-module.html" class="nav-link active">University Support</a>
+        <a href="analysis.html" class="nav-link">Analysis</a>
+        <a href="reports.html" class="nav-link">Reports</a>
+        <a href="settings.html" class="nav-link">Settings</a>
+        <a href="help.html" class="nav-link">Help</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <span><a href="index.html">Home</a></span> / <span class="current">University Support Module</span>
+        </div>
+
+        <!-- Page Title -->
+        <div class="page-header">
+            <h2>🎓 University Support Module</h2>
+            <p>Campus Knowledge System with Hybrid Retrieval (BM25 + FAISS + Reranker)</p>
+        </div>
+
+        <!-- Query Input Section -->
+        <section class="content-section">
+            <h3>Ask a Campus Question</h3>
+            
+            <form id="campusQueryForm" onsubmit="submitCampusQuery(event)">
+                <div class="form-group">
+                    <label class="form-label required" for="campusQuestion">Enter your question</label>
+                    <textarea 
+                        id="campusQuestion" 
+                        class="form-textarea" 
+                        placeholder="E.g., What are the library timings? How do I apply for hostel?"
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="campusCategory">Category (Optional)</label>
+                    <select id="campusCategory" class="form-select">
+                        <option value="">All Categories</option>
+                        <option value="academic">Academic</option>
+                        <option value="hostel">Hostel & Facilities</option>
+                        <option value="admission">Admission</option>
+                        <option value="examination">Examination</option>
+                        <option value="fees">Fees & Finance</option>
+                        <option value="library">Library</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-primary">Submit Query</button>
+                <button type="button" class="btn-secondary" onclick="clearCampusForm()">Clear</button>
+            </form>
+        </section>
+
+        <!-- Results Section -->
+        <section class="content-section" id="campusResultsSection" style="display: none;">
+            <h3>Query Results</h3>
+            
+            <div id="confidenceInfo" class="alert alert-success">
+                <span>✓</span>
+                <div id="confidenceMessage"></div>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Question</th>
+                        <th>Answer</th>
+                        <th>Category</th>
+                        <th>Relevance</th>
+                    </tr>
+                </thead>
+                <tbody id="campusResultsTableBody">
+                    <!-- Results will be inserted here -->
+                </tbody>
+            </table>
+
+            <div class="action-buttons" style="margin-top: 20px;">
+                <button class="btn-secondary" onclick="exportTableToCSV('campusResultsTable', 'campus_results.csv')">Export Results</button>
+            </div>
+        </section>
+
+        <!-- Module Statistics -->
+        <section class="content-section">
+            <h3>Module Statistics</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Value</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Total FAQ Pairs</strong></td>
+                        <td>503</td>
+                        <td>Campus-specific questions and answers</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Exact Match (EM)</strong></td>
+                        <td>66.5%</td>
+                        <td>Percentage of exact answer matches</td>
+                    </tr>
+                    <tr>
+                        <td><strong>F1 Score</strong></td>
+                        <td>77.6%</td>
+                        <td>Token-level similarity score</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Grounding</strong></td>
+                        <td>100.0%</td>
+                        <td>All answers from verified sources</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hallucination Rate</strong></td>
+                        <td>0.0%</td>
+                        <td>No fabricated information</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Retrieval Method</strong></td>
+                        <td>Hybrid</td>
+                        <td>BM25 + FAISS + CrossEncoder Reranker</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Model</strong></td>
+                        <td>T5-Small</td>
+                        <td>Fine-tuned on campus FAQs</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- System Architecture -->
+        <section class="content-section">
+            <h3>System Architecture</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>BM25 Retrieval:</strong> Keyword-based sparse retrieval for exact matching
+                </div>
+                <div class="info-item">
+                    <strong>FAISS Dense Retrieval:</strong> Semantic search using embeddings
+                </div>
+                <div class="info-item">
+                    <strong>CrossEncoder Reranking:</strong> ms-marco-MiniLM-L-6-v2 for final ranking
+                </div>
+                <div class="info-item">
+                    <strong>Confidence Threshold:</strong> 0.45 for HITL escalation
+                </div>
+            </div>
+        </section>
+
+        <!-- Dataset Categories -->
+        <section class="content-section">
+            <h3>Dataset Distribution</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Questions</th>
+                        <th>Percentage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Academic</td>
+                        <td>145</td>
+                        <td>28.8%</td>
+                    </tr>
+                    <tr>
+                        <td>Hostel & Facilities</td>
+                        <td>98</td>
+                        <td>19.5%</td>
+                    </tr>
+                    <tr>
+                        <td>Admission</td>
+                        <td>87</td>
+                        <td>17.3%</td>
+                    </tr>
+                    <tr>
+                        <td>Examination</td>
+                        <td>76</td>
+                        <td>15.1%</td>
+                    </tr>
+                    <tr>
+                        <td>Fees & Finance</td>
+                        <td>56</td>
+                        <td>11.1%</td>
+                    </tr>
+                    <tr>
+                        <td>Library</td>
+                        <td>41</td>
+                        <td>8.2%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Universal Digital Campus System. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function submitCampusQuery(event) {
+            event.preventDefault();
+            
+            const question = document.getElementById('campusQuestion').value;
+            const category = document.getElementById('campusCategory').value;
+            
+            // Show loading
+            showLoading();
+            
+            // Simulate API call (replace with actual API endpoint)
+            setTimeout(() => {
+                hideLoading();
+                
+                // Sample results (replace with actual API response)
+                const results = [
+                    {
+                        rank: 1,
+                        question: "What are the library timings?",
+                        answer: "The central library is open from 8:00 AM to 10:00 PM on weekdays and 9:00 AM to 6:00 PM on weekends.",
+                        category: "Library",
+                        confidence: 0.95
+                    },
+                    {
+                        rank: 2,
+                        question: "How can I access library resources online?",
+                        answer: "Students can access e-resources through the university portal using their student ID and password.",
+                        category: "Library",
+                        confidence: 0.88
+                    },
+                    {
+                        rank: 3,
+                        question: "What is the fine for late return of books?",
+                        answer: "The fine is Rs. 2 per day for regular books and Rs. 5 per day for reference books.",
+                        category: "Library",
+                        confidence: 0.82
+                    }
+                ];
+                
+                displayCampusResults(results);
+                
+                const avgConfidence = (results.reduce((sum, r) => sum + r.confidence, 0) / results.length * 100).toFixed(1);
+                document.getElementById('confidenceMessage').innerHTML = 
+                    `<strong>High Confidence Results</strong><br>Average relevance score: ${avgConfidence}%`;
+                
+                showAlert('Query processed successfully!', 'success');
+            }, 1500);
+        }
+        
+        function displayCampusResults(results) {
+            const tbody = document.getElementById('campusResultsTableBody');
+            tbody.innerHTML = '';
+            
+            results.forEach(result => {
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td>${result.rank}</td>
+                    <td>${result.question}</td>
+                    <td>${result.answer}</td>
+                    <td>${result.category}</td>
+                    <td><span class="status-badge ${result.confidence > 0.85 ? 'success' : result.confidence > 0.7 ? 'warning' : 'error'}">${(result.confidence * 100).toFixed(1)}%</span></td>
+                `;
+            });
+            
+            document.getElementById('campusResultsSection').style.display = 'block';
+        }
+        
+        function clearCampusForm() {
+            document.getElementById('campusQueryForm').reset();
+            document.getElementById('campusResultsSection').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Documentation - UDC System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <h1 class="project-title">UDC System</h1>
+        </div>
+        <div class="header-center">
+            <span class="institution">Universal Digital Campus</span>
+        </div>
+        <div class="header-right">
+            <span class="user-role">Admin</span>
+            <button class="btn-secondary" onclick="logout()">Logout</button>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navigation">
+        <a href="index.html" class="nav-link">Dashboard</a>
+        <a href="legal-module.html" class="nav-link">Legal Awareness</a>
+        <a href="university-module.html" class="nav-link">University Support</a>
+        <a href="analysis.html" class="nav-link">Analysis</a>
+        <a href="reports.html" class="nav-link">Reports</a>
+        <a href="settings.html" class="nav-link">Settings</a>
+        <a href="help.html" class="nav-link active">Help</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <span><a href="index.html">Home</a></span> / <span class="current">Help & Documentation</span>
+        </div>
+
+        <!-- Page Title -->
+        <div class="page-header">
+            <h2>❓ Help & Documentation</h2>
+            <p>User guides, FAQs, and technical documentation for the UDC system</p>
+        </div>
+
+        <!-- Quick Links -->
+        <section class="content-section">
+            <h3>Quick Navigation</h3>
+            <div class="action-buttons">
+                <button class="btn-secondary" onclick="scrollToSection('getting-started')">Getting Started</button>
+                <button class="btn-secondary" onclick="scrollToSection('user-manual')">User Manual</button>
+                <button class="btn-secondary" onclick="scrollToSection('faq')">FAQ</button>
+                <button class="btn-secondary" onclick="scrollToSection('troubleshooting')">Troubleshooting</button>
+                <button class="btn-secondary" onclick="scrollToSection('contact')">Contact Support</button>
+            </div>
+        </section>
+
+        <!-- Getting Started -->
+        <section class="content-section" id="getting-started">
+            <h3>🚀 Getting Started</h3>
+            <div style="line-height: 1.8;">
+                <h4>What is UDC System?</h4>
+                <p>The Universal Digital Campus (UDC) is an intelligent question answering system that provides accurate responses for:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Legal Awareness:</strong> Indian Penal Code (IPC) sections, legal procedures, and case law</li>
+                    <li><strong>University Support:</strong> Campus facilities, academic policies, hostel information, and administrative procedures</li>
+                </ul>
+
+                <h4 style="margin-top: 20px;">System Architecture</h4>
+                <p>UDC uses a dual-module RAG (Retrieval-Augmented Generation) architecture:</p>
+                <ol style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Intent Routing:</strong> Automatically classifies queries as legal or campus-related</li>
+                    <li><strong>Legal Module:</strong> Uses fine-tuned InLegalBERT for legal question answering</li>
+                    <li><strong>University Module:</strong> Employs hybrid retrieval (BM25 + FAISS) with T5 generation</li>
+                    <li><strong>Response Generation:</strong> Produces grounded answers with source attribution</li>
+                </ol>
+
+                <h4 style="margin-top: 20px;">Key Performance Metrics</h4>
+                <table class="data-table" style="margin-top: 10px;">
+                    <thead>
+                        <tr>
+                            <th>Module</th>
+                            <th>Exact Match</th>
+                            <th>F1 Score</th>
+                            <th>Hallucination</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Legal Awareness</td>
+                            <td>99.6%</td>
+                            <td>99.7%</td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td>University Support</td>
+                            <td>66.5%</td>
+                            <td>77.6%</td>
+                            <td>0%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- User Manual -->
+        <section class="content-section" id="user-manual">
+            <h3>📖 User Manual</h3>
+            
+            <h4>How to Use Legal Awareness Module</h4>
+            <ol style="margin-left: 20px; line-height: 1.8;">
+                <li>Navigate to <a href="legal-module.html">Legal Awareness</a> page</li>
+                <li>Enter your legal query in the text area (e.g., "What is Section 302 IPC?")</li>
+                <li>Optionally select a category (Procedural, Substantive, Criminal, Civil)</li>
+                <li>Click "Submit Query" button</li>
+                <li>View results table with ranked answers, categories, and confidence scores</li>
+                <li>Review criminal warning if your query contains keywords like "murder", "theft", etc.</li>
+            </ol>
+
+            <h4 style="margin-top: 20px;">How to Use University Support Module</h4>
+            <ol style="margin-left: 20px; line-height: 1.8;">
+                <li>Navigate to <a href="university-module.html">University Support</a> page</li>
+                <li>Enter your campus-related query (e.g., "What are hostel check-in times?")</li>
+                <li>Select category: Academic, Hostel, Library, Sports, Medical, or Administrative</li>
+                <li>Click "Submit Query" button</li>
+                <li>View hybrid retrieval results with relevance scores</li>
+                <li>Results are color-coded: Green (>85%), Yellow (70-85%), Red (<70%)</li>
+            </ol>
+
+            <h4 style="margin-top: 20px;">Understanding Results</h4>
+            <table class="data-table" style="margin-top: 10px;">
+                <thead>
+                    <tr>
+                        <th>Column</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Rank</strong></td>
+                        <td>Position in search results (1 = most relevant)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Question</strong></td>
+                        <td>Matched question from dataset</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Answer</strong></td>
+                        <td>Generated/retrieved answer</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Category</strong></td>
+                        <td>Domain classification (e.g., Criminal, Hostel)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Confidence</strong></td>
+                        <td>Relevance score (0-100%)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- FAQ -->
+        <section class="content-section" id="faq">
+            <h3>❔ Frequently Asked Questions</h3>
+            
+            <div style="margin-top: 15px;">
+                <h4>Q1: What types of legal questions can I ask?</h4>
+                <p style="margin-left: 20px; line-height: 1.8;">You can ask about IPC sections, legal procedures, criminal law, civil law, and case-related queries. The system is trained on 9,763 legal QA pairs covering Indian legal framework.</p>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <h4>Q2: How accurate are the answers?</h4>
+                <p style="margin-left: 20px; line-height: 1.8;">Legal module achieves 99.6% Exact Match accuracy, and University module achieves 66.5% EM with 77.6% F1. Both modules have 0% hallucination rate, ensuring factual responses.</p>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <h4>Q3: What does "Grounding: 100%" mean?</h4>
+                <p style="margin-left: 20px; line-height: 1.8;">It means every answer is grounded in the source dataset. The system never fabricates information - all responses are derived from verified QA pairs.</p>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <h4>Q4: Why am I seeing a criminal warning?</h4>
+                <p style="margin-left: 20px; line-height: 1.8;">If your query contains keywords like "murder", "theft", "assault", etc., the system displays a disclaimer stating this is for educational purposes only and not legal advice.</p>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <h4>Q5: Can I download evaluation results?</h4>
+                <p style="margin-left: 20px; line-height: 1.8;">Yes! Visit the <a href="reports.html">Reports</a> page to download metrics in CSV/JSON format, complete evaluation reports in PDF, and presentation materials.</p>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <h4>Q6: What is hybrid retrieval?</h4>
+                <p style="margin-left: 20px; line-height: 1.8;">University module uses both BM25 (keyword-based) and FAISS (semantic vector search), then reranks with CrossEncoder. This combines the strengths of lexical and semantic matching.</p>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <h4>Q7: How do I cite this system in my research?</h4>
+                <p style="margin-left: 20px; line-height: 1.8;">Reference the published conference paper: "Universal Digital Campus: An Intelligent Multi-Domain Question Answering System" (CRC_587.pdf). Download citation from <a href="reports.html">Reports</a> page.</p>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <h4>Q8: Can I add new datasets?</h4>
+                <p style="margin-left: 20px; line-height: 1.8;">Yes, but requires retraining. Place new QA pairs in CSV format in the data/ folder, then run training scripts. See technical documentation for details.</p>
+            </div>
+        </section>
+
+        <!-- Troubleshooting -->
+        <section class="content-section" id="troubleshooting">
+            <h3>🔧 Troubleshooting</h3>
+            
+            <table class="data-table" style="margin-top: 15px;">
+                <thead>
+                    <tr>
+                        <th>Problem</th>
+                        <th>Possible Cause</th>
+                        <th>Solution</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>No results displayed</td>
+                        <td>Query too short or API error</td>
+                        <td>Enter at least 5 words. Check API status in Settings.</td>
+                    </tr>
+                    <tr>
+                        <td>Low confidence scores</td>
+                        <td>Query outside training domain</td>
+                        <td>Rephrase query or select appropriate category.</td>
+                    </tr>
+                    <tr>
+                        <td>Slow response time</td>
+                        <td>High server load or large result set</td>
+                        <td>Reduce Top-K in Settings. Check system resources.</td>
+                    </tr>
+                    <tr>
+                        <td>API connection error</td>
+                        <td>Backend services not running</td>
+                        <td>Start Flask (port 5000) and FastAPI (port 8000) servers.</td>
+                    </tr>
+                    <tr>
+                        <td>Missing search indices</td>
+                        <td>Indices not built</td>
+                        <td>Run: python backend/scripts/2_build_indices.py</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 style="margin-top: 25px;">Running Backend Services</h4>
+            <div style="background: #F5F6FA; padding: 15px; border-left: 4px solid #0A3D62; margin-top: 10px;">
+                <strong>Legal Awareness API (Flask):</strong><br>
+                <code style="background: white; padding: 5px; display: inline-block; margin-top: 5px;">
+                    cd "LEGAL AWARENESS MODULE/legal-awareness-backend" && python src/app.py
+                </code><br><br>
+                
+                <strong>University Support API (FastAPI):</strong><br>
+                <code style="background: white; padding: 5px; display: inline-block; margin-top: 5px;">
+                    cd "UNIVERSITY SUPPORT MODULE/backend/api" && uvicorn app:app --reload --port 8000
+                </code>
+            </div>
+        </section>
+
+        <!-- System Architecture -->
+        <section class="content-section">
+            <h3>🏗️ System Architecture Overview</h3>
+            <div style="background: #F5F6FA; padding: 20px; margin-top: 15px;">
+                <pre style="line-height: 1.6; font-family: 'Courier New', monospace;">
+┌─────────────────────────────────────────────────────┐
+│               USER QUERY INPUT                      │
+└────────────────┬────────────────────────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────────────────────────┐
+│         INTENT ROUTING MODULE                       │
+│    (Ensemble: CNN + BERT + Rule-Based)              │
+│         Accuracy: 94.1%                             │
+└──────────┬──────────────────────────┬───────────────┘
+           │                          │
+           ▼                          ▼
+┌──────────────────────┐   ┌─────────────────────────┐
+│  LEGAL MODULE        │   │  UNIVERSITY MODULE      │
+│  InLegalBERT         │   │  T5-Small + Hybrid      │
+│  9,763 QA pairs      │   │  503 QA pairs           │
+│  EM: 99.6%           │   │  EM: 66.5%              │
+│  F1: 99.7%           │   │  F1: 77.6%              │
+└──────────┬───────────┘   └────────┬────────────────┘
+           │                        │
+           │                        ▼
+           │              ┌─────────────────────────┐
+           │              │ BM25 + FAISS Retrieval  │
+           │              │ CrossEncoder Reranking  │
+           │              └────────┬────────────────┘
+           │                        │
+           ▼                        ▼
+┌─────────────────────────────────────────────────────┐
+│           GROUNDED ANSWER GENERATION                │
+│         (Hallucination Rate: 0%)                    │
+└────────────────┬────────────────────────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────────────────────────┐
+│         RESPONSE WITH PROVENANCE                    │
+│    (Source attribution + Confidence score)          │
+└─────────────────────────────────────────────────────┘
+                </pre>
+            </div>
+        </section>
+
+        <!-- Contact Support -->
+        <section class="content-section" id="contact">
+            <h3>📧 Contact & Support</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>Developer:</strong> Umashankar
+                </div>
+                <div class="info-item">
+                    <strong>Email:</strong> umashankar@university.edu
+                </div>
+                <div class="info-item">
+                    <strong>Department:</strong> Computer Science & Engineering
+                </div>
+                <div class="info-item">
+                    <strong>Project Type:</strong> Final Year Project (B.Tech)
+                </div>
+                <div class="info-item">
+                    <strong>Documentation:</strong> <a href="reports.html">Download Technical Docs</a>
+                </div>
+                <div class="info-item">
+                    <strong>Source Code:</strong> Available on request
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Resources -->
+        <section class="content-section">
+            <h3>📚 Additional Resources</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Resource</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Research Paper (CRC_587.pdf)</td>
+                        <td>Published conference paper with evaluation</td>
+                        <td><button class="btn-secondary" onclick="openPaper()">View</button></td>
+                    </tr>
+                    <tr>
+                        <td>Technical Documentation</td>
+                        <td>Detailed implementation guide</td>
+                        <td><button class="btn-secondary" onclick="downloadTechDoc()">Download</button></td>
+                    </tr>
+                    <tr>
+                        <td>Viva Presentation</td>
+                        <td>PowerPoint slides for project defense</td>
+                        <td><button class="btn-secondary" onclick="downloadPresentation()">Download</button></td>
+                    </tr>
+                    <tr>
+                        <td>Demo Video</td>
+                        <td>System walkthrough and features</td>
+                        <td><button class="btn-secondary" onclick="viewDemo()">Watch</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Universal Digital Campus System. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function openPaper() {
+            showAlert('Opening published research paper...', 'info');
+        }
+
+        function downloadTechDoc() {
+            showAlert('Downloading technical documentation...', 'success');
+        }
+
+        function downloadPresentation() {
+            showAlert('Downloading viva presentation slides...', 'success');
+        }
+
+        function viewDemo() {
+            showAlert('Opening demo video in media player...', 'info');
+        }
+    </script>
+</body>
+</html>
