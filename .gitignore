@@ -40,3 +40,16 @@ node_modules/
 .vscode/
 .idea/
 *.log
+
+# Presentations & Internal Working Docs
+*.pptx
+*.ppt
+*.docx
+*.doc
+docs/
+*/docs/
+*/*/docs/
+Papers/Conference.pptx
+Papers/UDC_IEE.pdf
+Papers/UDC_Project-Report.pdf
+*Ace_Attorney*
